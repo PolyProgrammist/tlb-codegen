@@ -8327,6 +8327,8 @@ shared_lib_descr$00 lib:^Cell publishers:(Hashmap 256 True)
   = LibDescr;
 */
 
+
+
 export function loadLibDescr(slice: Slice): LibDescr {
     if (((slice.remainingBits >= 2) && (slice.preloadUint(2) == 0b00))) {
         slice.loadUint(2);

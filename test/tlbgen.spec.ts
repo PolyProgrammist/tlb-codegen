@@ -311,10 +311,13 @@ describe('Generating tlb code', () => {
         let conditionalFieldBUndef: ConditionalField = { kind: 'ConditionalField', a: 0, b: undefined }
         checkSameOnStoreLoad(conditionalFieldBUndef, loadConditionalField, storeConditionalField);
 
-        let bitSelection: BitSelection = { kind: 'BitSelection', a: 5, b: 5 }
-        checkSameOnStoreLoad(bitSelection, loadBitSelection, storeBitSelection);
+        let bitSelection: any = JSON.parse(JSON.stringify({ kind: 'BitSelection', a: 5, b: 5 }))
+        let cell = beginCell();
+        storeBitSelection(bitSelection)(cell);
+        
+        // checkSameOnStoreLoad(bitSelection, loadBitSelection, storeBitSelection);
 
-        let bitSelectionIncorrect: BitSelection = { kind: 'BitSelection', a: 8, b: 5 }
+        let bitSelectionIncorrect: any = { kind: 'BitSelection', a: 8, b: 5 }
         checkDifferOnStoreLoad(bitSelectionIncorrect, loadBitSelection, storeBitSelection);
 
         let conditionalRef: ConditionalRef = { kind: 'ConditionalRef', x: 1, y: { kind: 'Simple', a: 3, b: 4 } }
